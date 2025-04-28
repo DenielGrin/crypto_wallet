@@ -15,61 +15,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 import com.degrin.bitcoinwallet.ui.theme.getAppThemeTypography
 import com.degrin.bitcoinwallet.ui.theme.robotoRegular
-
-@Composable
-fun editTextStyle() = getAppThemeTypography().titleMedium.copy(
-    MaterialTheme.colorScheme.onSecondaryContainer
-)
-
-@Composable
-fun editTextHintStyle() = getAppThemeTypography().titleMedium.copy(
-    MaterialTheme.colorScheme.onSecondaryContainer
-)
-
-@Composable
-fun PlaceholderText(hint: String) = Text(
-    text = hint,
-    style = editTextHintStyle()
-)
-
-@Composable
-fun getInputFieldColors() = TextFieldDefaults.colors(
-    unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
-    focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
-    focusedIndicatorColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
-    unfocusedIndicatorColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
-    cursorColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-    errorCursorColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
-    errorContainerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
-    errorSupportingTextColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
-)
-
-@Composable
-fun getTextFieldColors() = TextFieldDefaults.colors(
-    unfocusedContainerColor = Color.Transparent,
-    focusedContainerColor = Color.Transparent,
-    focusedIndicatorColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
-    unfocusedIndicatorColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
-    cursorColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-    errorCursorColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
-    errorContainerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
-    errorSupportingTextColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
-)
 
 @Composable
 fun InputFieldCompositionLocalProvider(
@@ -96,7 +50,6 @@ fun BaseTextField(
     maxLines: Int = 1,
     label: @Composable (() -> Unit)? = null,
     shape: CornerBasedShape = ShapeDefaults.Medium,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     onValueChange: (String) -> Unit,
     keyboardActions: KeyboardActions = KeyboardActions.Default
@@ -116,16 +69,39 @@ fun BaseTextField(
                     onValueChange(text)
                 }
             },
-            placeholder = { PlaceholderText(hint) },
+            placeholder = {
+                Text(
+                    text = hint,
+                    style = getAppThemeTypography().titleMedium.copy(
+                        MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                )
+            },
             shape = shape,
-            textStyle = editTextStyle(),
+            textStyle = getAppThemeTypography().titleMedium.copy(
+                MaterialTheme.colorScheme.onSecondaryContainer
+            ),
             isError = isError,
-            visualTransformation =  VisualTransformation.None,
+            visualTransformation = VisualTransformation.None,
             keyboardOptions = keyboardOptions,
             supportingText = {
-                SupportingText(errorText, counterText, value, maxLength)
+                SupportingText(
+                    errorText = errorText,
+                    counterText = counterText,
+                    value = value,
+                    maxLength = maxLength
+                )
             },
-            colors = getInputFieldColors(),
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
+                focusedIndicatorColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
+                cursorColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                errorCursorColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
+                errorContainerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
+                errorSupportingTextColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
+            ),
             keyboardActions = keyboardActions,
         )
     }
@@ -173,9 +149,9 @@ fun SupportingText(
 fun BaseTextField_Preview() {
     AppTheme {
         BaseTextField(
-            value = "BaseTextField",
+            value = "text field value",
             onValueChange = {},
-            hint = "BaseTextField"
+            hint = "text field hint"
         )
     }
 }
