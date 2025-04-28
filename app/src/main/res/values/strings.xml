@@ -7,4 +7,11 @@
     <string name="menu_dapps_label">DApps</string>
     <string name="menu_swap_label">Swap</string>
     <string name="menu_settings_label">Settings</string>
+
+    <!--    Wallet -->
+    <string name="wallet_screen_title">Bitcoin wallet</string>
+    <string name="wallet_screen_subtitle">Balance</string>
+    <string name="wallet_screen_input_amount_hint">Amount to send</string>
+    <string name="wallet_screen_input_address_hint">Address to send</string>
+    <string name="wallet_screen_button_send_title">Send</string>
 </resources>
