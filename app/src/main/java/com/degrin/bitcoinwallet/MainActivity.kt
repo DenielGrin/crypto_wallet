@@ -13,19 +13,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.degrin.bitcoinwallet.core.navigation.data.Screens
 import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
-import com.degrin.bitcoinwallet.ui.theme.BitcoinWalletTheme
+import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        installSplashScreen()
         setContent {
             Content()
         }
@@ -36,8 +37,7 @@ class MainActivity : ComponentActivity() {
 private fun Content() {
     val navController: NavHostController = rememberNavController()
 
-    BitcoinWalletTheme {
-
+    AppTheme {
         Scaffold(
             modifier = Modifier
                 .imePadding()

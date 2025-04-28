@@ -186,7 +186,7 @@ fun getAppThemeTypography(): Typography = Typography(
 )
 
 @Composable
-fun BitcoinWalletTheme(
+fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

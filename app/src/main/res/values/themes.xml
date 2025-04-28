@@ -9,7 +9,7 @@
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/primary</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app</item>
         <item name="postSplashScreenTheme">@style/Theme.BitcoinWallet</item>
     </style>
 
