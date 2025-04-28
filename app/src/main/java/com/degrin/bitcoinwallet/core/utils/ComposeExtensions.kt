@@ -109,7 +109,7 @@ fun Modifier.customRippleClick(
 ): Modifier = composed {
     clickable(
         indication = rememberRipple(
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            color = MaterialTheme.colorScheme.secondaryContainer,
             radius = radius,
             bounded = bounded
         ),

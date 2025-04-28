@@ -8,7 +8,6 @@ import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -20,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -35,9 +35,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.navigation.utils.navigateSingleTop
 import com.degrin.bitcoinwallet.core.navigation.utils.navigateToTab
 import com.degrin.bitcoinwallet.core.utils.customRippleClick
+import com.degrin.bitcoinwallet.core.utils.showToastError
 import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
@@ -95,7 +97,7 @@ fun BottomBarContent(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
             .fillMaxWidth()
-            .padding(PaddingValues(horizontal = 16.dp))
+            .padding(PaddingValues(all = 16.dp))
     ) {
         Row(
             modifier = Modifier
@@ -108,7 +110,7 @@ fun BottomBarContent(
                 .fillMaxWidth()
                 .height(72.dp)
                 .background(
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(size = 40.dp)
                 )
                 .padding(horizontal = 12.dp),
@@ -121,38 +123,66 @@ fun BottomBarContent(
                 BottomBarItem.SwapTab,
                 BottomBarItem.SettingsTab,
             ).forEach { item ->
-                Box(
+                BottomBarItem(
+                    isSelected = currentRoute == item.screenName,
                     modifier = Modifier
-                        .width(48.dp)
-                        .height(48.dp)
                         .customRippleClick(
                             onClick = {
                                 if (item.screenName != navController.currentBackStackEntry?.destination?.route) {
-                                    navController.navigateToTab(
-                                        item.screenName,
-                                        saveState = true
-                                    )
+                                    when (item.screenName) {
+                                        null -> showToastError(
+                                            context = context,
+                                            message = context.getString(R.string.not_implement_yet_title)
+                                        )
+
+                                        else -> navController.navigateToTab(
+                                            screenName = item.screenName,
+                                            saveState = true
+                                        )
+                                    }
                                 }
                             }
                         )
                         .weight(1f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        modifier = Modifier
-                            .width(24.dp)
-                            .height(24.dp),
-                        painter = painterResource(item.iconId),
-                        contentDescription = stringResource(item.labelId),
-                        tint = when {
-                            currentRoute == item.screenName -> MaterialTheme.colorScheme.surfaceVariant
-                            else -> MaterialTheme.colorScheme.outline
-                        }
-                    )
-                }
+                    labelId = item.labelId,
+                    iconId = item.iconId
+                )
             }
+            Spacer(modifier = Modifier.height(20.dp))
         }
-        Spacer(modifier = Modifier.height(20.dp))
+    }
+}
+
+@Composable
+fun BottomBarItem(
+    isSelected: Boolean,
+    labelId: Int,
+    iconId: Int,
+    modifier: Modifier = Modifier
+) {
+    val itemColor = when {
+        isSelected -> MaterialTheme.colorScheme.surfaceVariant
+        else -> MaterialTheme.colorScheme.outline
+    }
+    Column(
+        modifier = modifier
+            .width(48.dp)
+            .height(48.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            modifier = Modifier
+                .width(24.dp)
+                .height(24.dp),
+            painter = painterResource(iconId),
+            contentDescription = stringResource(labelId),
+            tint = itemColor
+        )
+        Text(
+            text = stringResource(labelId),
+            style = MaterialTheme.typography.displaySmall.copy(color = itemColor)
+        )
     }
 }
 

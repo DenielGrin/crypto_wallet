@@ -4,16 +4,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
-//
-//@Composable
-//fun <T> NavController.ObserveForResult(key: String, onResult: (T) -> Unit) {
-//    val handle = currentBackStackEntry?.savedStateHandle ?: return
-//    val screenResult by handle.getLiveData<T>(key).observeAsState()
-//
-//    screenResult?.let {
-//        onResult(handle.remove<T>(key) ?: return)
-//    }
-//}
 
 fun <T> NavController.saveResultToBackStackScreen(key: String, value: T) {
     this.previousBackStackEntry
