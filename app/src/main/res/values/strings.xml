@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BitcoinWallet</string>
+    <string name="menu_transaction_label">Transactions</string>
+    <string name="menu_dapps_label">DApps</string>
+    <string name="menu_swap_label">Swap</string>
+    <string name="menu_settings_label">Settings</string>
 </resources>
