@@ -34,9 +34,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
+        buildConfig = true
     }
+
 }
 
 dependencies {
@@ -53,6 +56,7 @@ dependencies {
 
     implementation(libs.composeNavigation)
     implementation(libs.coil.compose)
+    implementation(libs.koinCompose)
     implementation(libs.converter.gson)
 
     testImplementation(libs.junit)

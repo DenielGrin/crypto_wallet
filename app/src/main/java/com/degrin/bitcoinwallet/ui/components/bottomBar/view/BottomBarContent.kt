@@ -40,7 +40,7 @@ import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateSing
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateToTab
 import com.degrin.bitcoinwallet.core.navigation.utils.compose.customRippleClick
 import com.degrin.bitcoinwallet.core.navigation.utils.warnings.showToastError
-import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
+import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.TransactionScreen
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
 @Composable

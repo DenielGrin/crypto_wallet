@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.feature.transactions.presentation.screen
+package com.degrin.bitcoinwallet.feature.wallet.presentation.screen
 
 import android.os.Bundle
 import androidx.compose.runtime.Composable

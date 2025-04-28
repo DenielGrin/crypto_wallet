@@ -4,7 +4,7 @@ package com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel
 
 import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
-import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
+import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.TransactionScreen
 
 sealed class BottomBarItem(
     val screenName: String?,

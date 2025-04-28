@@ -12,6 +12,7 @@ composeNavigationVersion = "2.7.7"
 coreSplashscreenVersion = "1.0.1"
 coilComposeVersion = "2.4.0"
 retrofitVersion = "2.9.0"
+koinComposeVersion = "3.4.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,6 +32,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 composeNavigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigationVersion" }
 core-splashscreen-v101 = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreenVersion" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
+koinCompose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinComposeVersion" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
 
 [plugins]

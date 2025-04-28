@@ -18,7 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.degrin.bitcoinwallet.core.navigation.data.Screens
-import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
+import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.TransactionScreen
 import com.degrin.bitcoinwallet.ui.components.bottomBar.view.BottomBarContent
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
