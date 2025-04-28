@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.core.utils
+package com.degrin.bitcoinwallet.core.navigation.utils.warnings
 
 import android.content.Context
 import android.widget.Toast

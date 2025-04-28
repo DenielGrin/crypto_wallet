@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.degrin.bitcoinwallet.core.navigation.Screen
-import com.degrin.bitcoinwallet.core.navigation.utils.defaultScreenName
+import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
 
 object TransactionScreen : Screen {
 

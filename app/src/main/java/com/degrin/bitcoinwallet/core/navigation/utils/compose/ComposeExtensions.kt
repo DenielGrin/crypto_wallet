@@ -1,7 +1,7 @@
 @file:SuppressLint("ModifierFactoryUnreferencedReceiver")
 @file:Suppress("Indentation")
 
-package com.degrin.bitcoinwallet.core.utils
+package com.degrin.bitcoinwallet.core.navigation.utils.compose
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi

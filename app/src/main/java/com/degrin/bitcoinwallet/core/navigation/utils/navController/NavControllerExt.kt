@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.core.navigation.utils
+package com.degrin.bitcoinwallet.core.navigation.utils.navController
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination

@@ -1,10 +1,6 @@
-package com.degrin.bitcoinwallet
+package com.degrin.bitcoinwallet.ui.view
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
@@ -17,29 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.degrin.bitcoinwallet.core.navigation.data.Screens
 import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
+import com.degrin.bitcoinwallet.ui.components.bottomBar.view.BottomBarContent
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
-import com.degrin.bitcoinwallet.ui.view.bottomBar.BottomBarContent
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        installSplashScreen()
-        setContent {
-            Content()
-        }
-    }
-}
 
 @Composable
-private fun Content() {
+fun Content() {
     val navController: NavHostController = rememberNavController()
 
     AppTheme {

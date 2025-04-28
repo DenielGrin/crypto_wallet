@@ -1,9 +1,9 @@
 @file:Suppress("Filename", "MatchingDeclarationName")
 
-package com.degrin.bitcoinwallet.ui.view.bottomBar
+package com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel
 
 import com.degrin.bitcoinwallet.R
-import com.degrin.bitcoinwallet.core.navigation.utils.defaultScreenName
+import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
 import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
 
 sealed class BottomBarItem(

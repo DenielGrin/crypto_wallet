@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.core.navigation.utils
+package com.degrin.bitcoinwallet.core.navigation.utils.navController
 
 import com.degrin.bitcoinwallet.core.navigation.Screen
 import com.google.gson.Gson

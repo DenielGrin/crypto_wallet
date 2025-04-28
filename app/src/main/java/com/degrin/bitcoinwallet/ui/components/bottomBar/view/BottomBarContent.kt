@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.ui.view.bottomBar
+package com.degrin.bitcoinwallet.ui.components.bottomBar.view
 
 import android.app.Activity
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -36,10 +36,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.degrin.bitcoinwallet.R
-import com.degrin.bitcoinwallet.core.navigation.utils.navigateSingleTop
-import com.degrin.bitcoinwallet.core.navigation.utils.navigateToTab
-import com.degrin.bitcoinwallet.core.utils.customRippleClick
-import com.degrin.bitcoinwallet.core.utils.showToastError
+import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateSingleTop
+import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateToTab
+import com.degrin.bitcoinwallet.core.navigation.utils.compose.customRippleClick
+import com.degrin.bitcoinwallet.core.navigation.utils.warnings.showToastError
 import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionScreen
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
@@ -118,10 +118,10 @@ fun BottomBarContent(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             listOf(
-                BottomBarItem.TransactionsTab,
-                BottomBarItem.DAppsTab,
-                BottomBarItem.SwapTab,
-                BottomBarItem.SettingsTab,
+                com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel.BottomBarItem.TransactionsTab,
+                com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel.BottomBarItem.DAppsTab,
+                com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel.BottomBarItem.SwapTab,
+                com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel.BottomBarItem.SettingsTab,
             ).forEach { item ->
                 BottomBarItem(
                     isSelected = currentRoute == item.screenName,
