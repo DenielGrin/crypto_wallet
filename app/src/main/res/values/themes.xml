@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.BitcoinWallet" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.BitcoinWallet" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:colorBackground">@color/primary</item>
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app</item>
+        <item name="postSplashScreenTheme">@style/Theme.BitcoinWallet</item>
+    </style>
+
 </resources>
