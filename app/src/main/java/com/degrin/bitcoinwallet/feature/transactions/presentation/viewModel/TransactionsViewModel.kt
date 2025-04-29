@@ -1,13 +1,13 @@
-package com.degrin.bitcoinwallet.feature.transactionDetails.presentation.viewModel
+package com.degrin.bitcoinwallet.feature.transactions.presentation.viewModel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.degrin.bitcoinwallet.feature.transactionDetails.domain.useCase.TransactionDetailsUseCase
+import com.degrin.bitcoinwallet.feature.transactions.domain.useCase.TransactionUseCase
 
-class TransactionDetailsViewModel(
-    private val useCase: TransactionDetailsUseCase
+class TransactionsViewModel(
+    private val useCase: TransactionUseCase
 ) : ViewModel() {
 
     var viewModelState by mutableStateOf<TransactionScreenState>(TransactionScreenState.None)

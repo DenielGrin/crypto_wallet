@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.feature.transactionDetails.presentation.viewModel
+package com.degrin.bitcoinwallet.feature.transactions.presentation.viewModel
 
 sealed interface TransactionScreenState {
     data object None : TransactionScreenState

@@ -1,6 +1,5 @@
 package com.degrin.bitcoinwallet.feature.wallet.presentation.view
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -57,14 +56,14 @@ fun WalletDataContent(
                     shape = RoundedCornerShape(size = Sizes.Size.dp40)
                 )
                 .shadow(4.dp, shape = RoundedCornerShape(Sizes.Size.dp40))
-                .fillMaxWidth()
+                .wrapContentWidth()
                 .height(Sizes.Size.dp50)
                 .background(
                     color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(size = Sizes.Size.dp40)
                 )
                 .padding(paddingValues = PaddingValues(Sizes.Paddings.dp12)),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.CenterStart
         ) {
             Text(
                 text = stringResource(

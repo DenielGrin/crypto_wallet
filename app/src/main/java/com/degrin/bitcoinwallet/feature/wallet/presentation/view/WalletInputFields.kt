@@ -51,6 +51,7 @@ fun WalletInputFields(
                 .height(Sizes.Size.dp50)
                 .fillMaxWidth(),
             buttonTextId = R.string.wallet_screen_button_send_title,
+            enabled = inputState.amount.isNotBlank() && inputState.address.isNotBlank(),
             onClick = onSendClick,
         )
     }

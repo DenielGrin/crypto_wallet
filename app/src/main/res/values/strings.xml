@@ -6,9 +6,9 @@
     <string name="default_error_empty_state_subtitle">Please try again later.</string>
     <string name="default_retry_title">Retry</string>
 
-    <string name="menu_transaction_label">Wallet</string>
+    <string name="menu_wallet_label">Wallet</string>
+    <string name="menu_transaction_label">Transactions</string>
     <string name="menu_dapps_label">DApps</string>
-    <string name="menu_swap_label">Swap</string>
     <string name="menu_settings_label">Settings</string>
 
     <!--    Errors -->

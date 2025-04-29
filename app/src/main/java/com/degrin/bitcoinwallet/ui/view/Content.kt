@@ -45,7 +45,7 @@ fun Content() {
             ) {
                 NavHost(
                     navController = navController,
-                    startDestination = WalletScreen.screenName
+                    startDestination = WalletScreen.screenName,
                 ) {
                     Screens.getAllScreens().forEach { screen ->
                         composable(
