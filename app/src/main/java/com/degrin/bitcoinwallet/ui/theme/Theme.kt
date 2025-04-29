@@ -185,10 +185,9 @@ fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = getAppThemeColors(darkMode = darkTheme)
 
     MaterialTheme(
-        colorScheme = colors,
+        colorScheme = getAppThemeColors(darkMode = darkTheme),
         shapes = Shapes(),
         typography = getAppThemeTypography(),
         content = content

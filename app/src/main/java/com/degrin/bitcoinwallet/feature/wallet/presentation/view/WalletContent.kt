@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.WalletScreenState
 import com.degrin.bitcoinwallet.ui.components.progress.BaseLottieLoader
+import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
 @Composable
 fun WalletContent(
@@ -34,10 +35,12 @@ fun WalletContent(
     }
 }
 
-@Preview(name = "TransactionContent")
+@Preview(showBackground = true)
 @Composable
 private fun PreviewTransactionContent() {
-    WalletContent(
-        state = WalletScreenState.Loading
-    )
+    AppTheme {
+        WalletContent(
+            state = WalletScreenState.Loading
+        )
+    }
 }
