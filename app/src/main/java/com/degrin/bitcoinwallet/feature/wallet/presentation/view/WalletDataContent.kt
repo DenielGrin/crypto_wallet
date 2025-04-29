@@ -17,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.tooling.preview.Preview
 import com.degrin.bitcoinwallet.R
+import com.degrin.bitcoinwallet.core.navigation.utils.formatting.formatBalance
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.InputFieldsState
 import com.degrin.bitcoinwallet.ui.sizes.Sizes
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
@@ -27,7 +29,7 @@ import java.math.BigDecimal
 
 @Composable
 fun WalletDataContent(
-    balance: BigDecimal?,
+    balance: BigDecimal,
     inputState: InputFieldsState,
     onUpdateAddress: (String) -> Unit,
     onUpdateAmount: (String) -> Unit,
@@ -62,9 +64,11 @@ fun WalletDataContent(
             Text(
                 text = stringResource(
                     R.string.wallet_screen_subtitle,
-                    balance?.toPlainString().orEmpty()
+                    formatBalance(balance)
                 ),
-                style = getAppThemeTypography().bodyMedium,
+                style = getAppThemeTypography().bodyMedium.copy(
+                    fontWeight = W700
+                ),
             )
         }
 
