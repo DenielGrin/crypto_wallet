@@ -1,9 +1,9 @@
 # Bitcoin Wallet Android App
 
 ### Technology Stack
-- ![Kotlin](https://img.shields.io/badge/kotlin-2.0.20-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white&labelColor=%237F52FF)
+- ![Kotlin](https://img.shields.io/badge/kotlin-2.0.0-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white&labelColor=%237F52FF)
 - ![Java](https://img.shields.io/badge/JAVA-1.8-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white&labelColor=%23ED8B00)
-- ![Gradle](https://img.shields.io/badge/Gradle-8.8-green.svg?style=for-the-badge&logo=Gradle&logoColor=blue)
+- ![Gradle](https://img.shields.io/badge/Gradle-8.10.2-green.svg?style=for-the-badge&logo=Gradle&logoColor=blue)
 - ![Android-Gradle](https://img.shields.io/badge/Android_Gradle_Plugin-8.5.2-grey.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 
 This minimalist Android app is written in Kotlin and designed for the Bitcoin Signet network. It allows users to send bitcoins to a specified address with basic wallet functionalities.
@@ -25,7 +25,7 @@ This minimalist Android app is written in Kotlin and designed for the Bitcoin Si
 
 ### Requirements:
 - **Android Studio**: Giraffe or newer.
-- **Min SDK**: 24.
+- **Min SDK**: 21.
 - **Internet Connection**: Required for fetching UTXOs and broadcasting transactions.
 
 ### Installation:
