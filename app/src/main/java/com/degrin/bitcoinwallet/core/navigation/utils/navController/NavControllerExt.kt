@@ -25,7 +25,7 @@ fun NavController.navigateToTab(
         // Avoid multiple copies of the same destination when
         launchSingleTop = true
         // Restore state when reselecting a previously selected item
-        restoreState = true
+//        restoreState = true
     }
 }
 

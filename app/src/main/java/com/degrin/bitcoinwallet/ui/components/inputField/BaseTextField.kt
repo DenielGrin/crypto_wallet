@@ -55,7 +55,7 @@ fun BaseTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
 
-    InputFieldCompositionLocalProvider {
+//    InputFieldCompositionLocalProvider {
         OutlinedTextField(
             modifier = modifier,
             value = value,
@@ -99,13 +99,13 @@ fun BaseTextField(
                 unfocusedIndicatorColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.5f),
                 cursorColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
                 errorCursorColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
-                errorContainerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
+                errorContainerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
                 errorSupportingTextColor = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.5f),
             ),
             keyboardActions = keyboardActions,
         )
     }
-}
+//}
 
 @Composable
 fun SupportingText(
@@ -149,9 +149,11 @@ fun SupportingText(
 fun BaseTextField_Preview() {
     AppTheme {
         BaseTextField(
-            value = "text field value",
+            value = "",
             onValueChange = {},
-            hint = "text field hint"
+            hint = "text field hint",
+            isError = true,
+            errorText = "error"
         )
     }
 }
