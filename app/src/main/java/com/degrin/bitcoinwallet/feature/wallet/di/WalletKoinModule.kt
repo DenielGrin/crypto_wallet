@@ -12,7 +12,7 @@ val walletModule = module {
 
     single<WalletRepository> {
         WalletRepositoryImpl(
-//            restApiClient = get()
+            api = get()
         )
     }
 

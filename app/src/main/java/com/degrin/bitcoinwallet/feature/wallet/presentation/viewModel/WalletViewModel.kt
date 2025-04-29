@@ -4,7 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.feature.wallet.domain.useCase.WalletUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class WalletViewModel(
     private val walletUseCase: WalletUseCase
@@ -13,17 +18,79 @@ class WalletViewModel(
     var viewModelState by mutableStateOf<WalletScreenState>(WalletScreenState.None)
         private set
 
+    private val _inputState = MutableStateFlow(InputFieldsState())
+    val inputState: StateFlow<InputFieldsState> = _inputState
+
     init {
-        updateState(WalletScreenState.Loading)
         getData()
     }
 
     private fun getData() {
-        updateState(WalletScreenState.Loading)
+        updateState(value = WalletScreenState.Loading)
+
+        viewModelScope.launch {
+            walletUseCase.getBalance()
+                .onSuccess {
+                    println("****DETEKT LOG**** : ${ it.toDouble()}")
+                    updateState(value = WalletScreenState.Data(balance = it.toDouble()))
+                }
+                .onFailure { exception ->
+                    println("****DETEKT LOG**** : ${ exception.message}")
+                    updateState(value = WalletScreenState.Error(exception.message))
+                }
+        }
     }
 
     private fun updateState(value: WalletScreenState) {
         viewModelState = value
+    }
+
+    fun onAmountChanged(amount: String) {
+        _inputState.value = _inputState.value.copy(amount = amount)
+        validateInput()
+    }
+
+    fun onAddressChanged(address: String) {
+        _inputState.value = _inputState.value.copy(address = address)
+        validateInput()
+    }
+
+    private fun validateInput(): Boolean {
+        var amountError: Int? = null
+        var addressError: Int? = null
+
+        val amount = _inputState.value.amount
+        val address = _inputState.value.address
+
+        when {
+            amount.isBlank() -> {
+                amountError = R.string.error_invalid_amount_empty
+            }
+            amount.toDoubleOrNull() == null -> {
+                amountError = R.string.error_invalid_amount_format
+            }
+        }
+
+        when {
+            address.isBlank() -> {
+                addressError = R.string.error_invalid_address_empty
+            }
+            !isValidBitcoinAddress(address) -> {
+                addressError = R.string.error_invalid_address_format
+            }
+        }
+
+        _inputState.value = _inputState.value.copy(
+            amountError = amountError,
+            addressError = addressError
+        )
+
+        return amountError == null && addressError == null
+    }
+
+    private fun isValidBitcoinAddress(address: String): Boolean {
+        // TODO Find a better way to validate Bitcoin address
+        return address.startsWith("tb1")
     }
 
     fun reloadData() {

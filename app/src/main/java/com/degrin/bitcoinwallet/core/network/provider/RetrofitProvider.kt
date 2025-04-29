@@ -1,42 +1,47 @@
 package com.degrin.bitcoinwallet.core.network.provider
 
 import com.degrin.bitcoinwallet.core.network.api.EsploraApi
-import retrofit2.Retrofit
-import kotlinx.serialization.json.Json
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import okhttp3.MediaType.Companion.toMediaType
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitProvider {
 
-     private const val BASE_URL = "https://mempool.space/signet/api/"
+    private const val BASE_URL = "https://mempool.space/signet/api/"
 
-     private val contentType = "application/json".toMediaType()
+    private val okHttpClient: OkHttpClient by lazy {
+        createOkHttpClient()
+    }
 
-     private val json = Json {
-         ignoreUnknownKeys = true
-         coerceInputValues = true
-     }
+    private fun createOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
 
-     private val okHttpClient: OkHttpClient by lazy {
-         val httpLoggingInterceptor = HttpLoggingInterceptor()
-         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
 
-         OkHttpClient.Builder()
-             .addInterceptor(httpLoggingInterceptor)
-             .build()
-     }
+    private val retrofit: Retrofit by lazy {
+        createRetrofit()
+    }
 
-     val retrofit: Retrofit by lazy {
-         Retrofit.Builder()
-             .baseUrl(BASE_URL)
-             .client(okHttpClient)
-             .addConverterFactory(json.asConverterFactory(contentType))
-             .build()
-     }
+    private fun createRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder().setLenient().create()
+                )
+            )
+            .build()
+    }
 
-     val esploraApi: EsploraApi by lazy {
-         retrofit.create(EsploraApi::class.java)
-     }
+    val esploraApi: EsploraApi by lazy {
+        retrofit.create(EsploraApi::class.java)
+    }
 }

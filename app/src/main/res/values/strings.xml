@@ -11,6 +11,12 @@
     <string name="menu_swap_label">Swap</string>
     <string name="menu_settings_label">Settings</string>
 
+    <!--    Errors -->
+    <string name="error_invalid_amount_empty">Amount cannot be empty</string>
+    <string name="error_invalid_amount_format">Invalid amount format</string>
+    <string name="error_invalid_address_empty">Address cannot be empty</string>
+    <string name="error_invalid_address_format">Invalid address format</string>
+
     <!--    Wallet -->
     <string name="wallet_screen_title">Bitcoin wallet</string>
     <string name="wallet_screen_subtitle">Balance</string>
