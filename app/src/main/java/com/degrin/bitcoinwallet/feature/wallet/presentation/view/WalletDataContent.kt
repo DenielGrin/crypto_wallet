@@ -9,16 +9,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.navigation.utils.formatting.formatBalance
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.InputFieldsState
@@ -48,17 +52,18 @@ fun WalletDataContent(
         Box(
             modifier = Modifier
                 .border(
-                    shape = CircleShape,
-                    border = BorderStroke(
-                        width = Sizes.BorderSizes.dp1,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                    ),
+                    width = Sizes.BorderSizes.dp1,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    shape = RoundedCornerShape(size = Sizes.Size.dp40)
                 )
+                .shadow(4.dp, shape = RoundedCornerShape(Sizes.Size.dp40))
+                .fillMaxWidth()
+                .height(Sizes.Size.dp50)
                 .background(
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.1f),
-                    shape = CircleShape
+                    color = MaterialTheme.colorScheme.primary,
+                    shape = RoundedCornerShape(size = Sizes.Size.dp40)
                 )
-                .padding(paddingValues = PaddingValues(Sizes.Paddings.dp16)),
+                .padding(paddingValues = PaddingValues(Sizes.Paddings.dp12)),
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -66,7 +71,7 @@ fun WalletDataContent(
                     R.string.wallet_screen_subtitle,
                     formatBalance(balance)
                 ),
-                style = getAppThemeTypography().bodyMedium.copy(
+                style = getAppThemeTypography().titleMedium.copy(
                     fontWeight = W700
                 ),
             )
