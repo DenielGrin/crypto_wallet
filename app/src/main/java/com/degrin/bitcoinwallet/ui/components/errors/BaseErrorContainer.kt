@@ -1,15 +1,14 @@
 package com.degrin.bitcoinwallet.ui.components.errors
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,18 +38,16 @@ fun BaseErrorContainer(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primary)
             .padding(
-                PaddingValues(all = Sizes.Paddings.dp40)
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(
+        Image(
             modifier = Modifier
                 .width(Sizes.Size.dp110)
                 .height(Sizes.Size.dp110)
                 .padding(bottom = Sizes.Paddings.dp24),
             painter = painterResource(R.drawable.ic_error),
-            tint = MaterialTheme.colorScheme.surfaceVariant,
             contentDescription = "Error image"
         )
 
@@ -71,9 +68,8 @@ fun BaseErrorContainer(
 
         Spacer(modifier = Modifier.height(Sizes.Size.dp24))
         BaseButton(
-            modifier = Modifier.padding(bottom = Sizes.Paddings.dp8),
-            buttonTextId = R.string.wallet_screen_button_send_title,
-            radius = Sizes.CornerShape.dp20,
+            buttonTextId = R.string.default_retry_title,
+            radius = Sizes.CornerShape.dp10,
             onClick = onReloadClick
         )
     }

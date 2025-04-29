@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.WalletScreenState
+import com.degrin.bitcoinwallet.ui.components.errors.BaseErrorContainer
 import com.degrin.bitcoinwallet.ui.components.progress.BaseLottieLoader
 import com.degrin.bitcoinwallet.ui.components.progress.BasePulseLoader
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
@@ -14,7 +15,8 @@ import com.degrin.bitcoinwallet.ui.theme.AppTheme
 @Composable
 fun WalletContent(
     modifier: Modifier = Modifier,
-    state: WalletScreenState
+    state: WalletScreenState,
+    onReloadClick: () -> Unit ,
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
@@ -23,9 +25,9 @@ fun WalletContent(
         when (state) {
             is WalletScreenState.Loading -> BasePulseLoader()
 
-            is WalletScreenState.Error -> {
-                // Handle error state
-            }
+            is WalletScreenState.Error -> BaseErrorContainer(
+                onReloadClick = onReloadClick,
+            )
 
             is WalletScreenState.Data -> {
                 // Handle data state
@@ -41,7 +43,8 @@ fun WalletContent(
 private fun PreviewTransactionContent() {
     AppTheme {
         WalletContent(
-            state = WalletScreenState.Loading
+            state = WalletScreenState.Loading,
+            onReloadClick = {}
         )
     }
 }

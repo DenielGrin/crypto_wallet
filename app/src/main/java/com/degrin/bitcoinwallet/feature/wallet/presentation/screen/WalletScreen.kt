@@ -19,6 +19,7 @@ object WalletScreen : Screen {
 
         WalletContent(
             state = viewModel.viewModelState,
+            onReloadClick = viewModel::reloadData,
         )
     }
 }

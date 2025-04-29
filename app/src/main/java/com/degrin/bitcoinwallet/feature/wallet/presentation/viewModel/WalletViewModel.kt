@@ -19,10 +19,14 @@ class WalletViewModel(
     }
 
     private fun getData() {
-
+        updateState(WalletScreenState.Loading)
     }
 
     private fun updateState(value: WalletScreenState) {
         viewModelState = value
+    }
+
+    fun reloadData() {
+        getData()
     }
 }
