@@ -1,5 +1,4 @@
-@file:Suppress("DEPRECATION")
-
+// File: build-logic/src/main/kotlin/ConventionPlugin.kt
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin

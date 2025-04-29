@@ -33,7 +33,7 @@ import com.degrin.bitcoinwallet.core.navigation.utils.compose.customRippleClick
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateSingleTop
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateToTab
 import com.degrin.bitcoinwallet.core.navigation.utils.warnings.showToastError
-import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.TransactionScreen
+import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.WalletScreen
 import com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel.BarItem
 import com.degrin.bitcoinwallet.ui.sizes.Sizes
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
@@ -56,7 +56,7 @@ fun BottomBarContent(
 
             override fun handleOnBackPressed() {
                 val currentScreen = navBackStackEntry?.destination?.route
-                val isDashboard = currentScreen?.contains(TransactionScreen.screenName)
+                val isDashboard = currentScreen?.contains(WalletScreen.screenName)
                 when {
                     currentScreen == null -> (context as? Activity)?.finish()
 
@@ -72,7 +72,7 @@ fun BottomBarContent(
 
                     else -> {
                         backPressedOnce = false
-                        navController.navigateSingleTop(TransactionScreen.screenName)
+                        navController.navigateSingleTop(WalletScreen.screenName)
                     }
                 }
             }

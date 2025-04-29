@@ -13,6 +13,7 @@ coreSplashscreenVersion = "1.0.1"
 coilComposeVersion = "2.4.0"
 retrofitVersion = "2.9.0"
 koinComposeVersion = "3.4.5"
+lottieComposeVersion = "6.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +38,7 @@ converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref
 androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-livedata-core-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-core-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycleRuntimeKtx" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieComposeVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

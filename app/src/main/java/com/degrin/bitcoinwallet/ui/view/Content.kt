@@ -18,7 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.degrin.bitcoinwallet.core.navigation.data.Screens
-import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.TransactionScreen
+import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.WalletScreen
 import com.degrin.bitcoinwallet.ui.components.bottomBar.view.BottomBarContent
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
@@ -41,7 +41,7 @@ fun Content() {
             ) {
                 NavHost(
                     navController = navController,
-                    startDestination = TransactionScreen.screenName
+                    startDestination = WalletScreen.screenName
                 ) {
                     Screens.getAllScreens().forEach { screen ->
                         composable(

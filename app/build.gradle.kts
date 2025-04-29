@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.koinCompose)
     implementation(libs.converter.gson)
+    implementation(libs.lottie.compose)
 
     testImplementation(libs.junit)
 

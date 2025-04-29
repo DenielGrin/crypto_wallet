@@ -4,7 +4,7 @@ package com.degrin.bitcoinwallet.ui.components.bottomBar.viewModel
 
 import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
-import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.TransactionScreen
+import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.WalletScreen
 
 sealed class BarItem(
     val screenName: String?,
@@ -12,7 +12,7 @@ sealed class BarItem(
     val iconId: Int
 ) {
     data object TransactionsTab : BarItem(
-        screenName = TransactionScreen.defaultScreenName(),
+        screenName = WalletScreen.defaultScreenName(),
         labelId = R.string.menu_transaction_label,
         iconId = R.drawable.ic_shield
     )
