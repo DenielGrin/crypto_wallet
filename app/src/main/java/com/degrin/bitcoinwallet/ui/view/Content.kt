@@ -3,7 +3,6 @@ package com.degrin.bitcoinwallet.ui.view
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -17,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.degrin.bitcoinwallet.core.navigation.data.Screens
+import com.degrin.bitcoinwallet.core.navigation.utils.keyboard.clearFocusOnClick
 import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.WalletScreen
 import com.degrin.bitcoinwallet.ui.components.bottomBar.view.BottomBarContent
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
@@ -28,7 +28,7 @@ fun Content() {
     AppTheme {
         Scaffold(
             modifier = Modifier
-                .imePadding()
+                .clearFocusOnClick()
                 .navigationBarsPadding()
                 .statusBarsPadding(),
             containerColor = MaterialTheme.colorScheme.primary,

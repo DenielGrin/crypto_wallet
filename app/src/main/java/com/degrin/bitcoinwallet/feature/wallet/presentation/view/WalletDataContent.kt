@@ -72,7 +72,6 @@ fun WalletDataContent(
             )
         }
 
-
         WalletInputFields(
             modifier = Modifier.fillMaxWidth(),
             inputState = inputState,
@@ -80,7 +79,6 @@ fun WalletDataContent(
             onUpdateAmount = onUpdateAmount,
             onSendClick = onSendClick
         )
-
     }
 }
 

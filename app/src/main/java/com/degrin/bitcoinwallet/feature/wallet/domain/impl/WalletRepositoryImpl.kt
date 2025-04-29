@@ -15,7 +15,7 @@ class WalletRepositoryImpl(
         return fundedSum.minus(spentSum)
     }
 
-    companion object {
+    companion object{
         private const val WALLET_ADDRESS = "tb1q3ae59urk6fjh6seectaqe3lavh5dx84penznwq"
     }
 }

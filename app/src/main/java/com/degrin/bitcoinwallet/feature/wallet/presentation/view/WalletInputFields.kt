@@ -34,7 +34,7 @@ fun WalletInputFields(
             value = inputState.amount,
             isError = inputState.amountError != null,
             errorText = inputState.amountError?.let { stringResource(it) },
-            hint = stringResource(R.string.wallet_screen_input_address_hint),
+            hint = stringResource(R.string.wallet_screen_input_amount_hint),
             onValueChange = onUpdateAmount,
         )
         BaseTextField(
