@@ -12,34 +12,37 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.degrin.bitcoinwallet.R
+import com.degrin.bitcoinwallet.ui.sizes.Sizes
 
 @Composable
-fun BaseRotationLoader(
+fun BasePulseLoader(
     modifier: Modifier = Modifier,
-    size: Dp = 80.dp
+    size: Dp = Sizes.Size.dp100
 ) {
-    val rotation by rememberInfiniteTransition(label = "").animateFloat(
-        initialValue = 0f,
-        targetValue = 360f,
+    val scale by rememberInfiniteTransition(label = "").animateFloat(
+        initialValue = 1f,
+        targetValue = 1.2f,
         animationSpec = infiniteRepeatable(
             animation = tween(
-                durationMillis = 1200,
+                durationMillis = 600,
                 easing = LinearEasing
             ),
-            repeatMode = RepeatMode.Restart
+            repeatMode = RepeatMode.Reverse
         ),
         label = ""
     )
 
     Image(
         modifier = modifier
-            .rotate(rotation)
+            .graphicsLayer(
+                scaleX = scale,
+                scaleY = scale
+            )
             .background(Color.Transparent)
             .size(size),
         painter = painterResource(id = R.drawable.ic_app),

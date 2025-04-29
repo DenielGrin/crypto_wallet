@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.WalletScreenState
 import com.degrin.bitcoinwallet.ui.components.progress.BaseLottieLoader
+import com.degrin.bitcoinwallet.ui.components.progress.BasePulseLoader
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 
 @Composable
@@ -20,7 +21,7 @@ fun WalletContent(
         contentAlignment = Alignment.Center
     ) {
         when (state) {
-            is WalletScreenState.Loading -> BaseLottieLoader()
+            is WalletScreenState.Loading -> BasePulseLoader()
 
             is WalletScreenState.Error -> {
                 // Handle error state
