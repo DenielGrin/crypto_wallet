@@ -16,6 +16,7 @@ object WalletScreen : Screen {
     @Composable
     override fun Content(navController: NavController, args: Bundle?) {
         val viewModel: WalletViewModel = koinViewModel()
+
         WalletContent(
             state = viewModel.viewModelState,
         )
