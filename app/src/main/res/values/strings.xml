@@ -19,7 +19,7 @@
 
     <!--    Wallet -->
     <string name="wallet_screen_title">Bitcoin wallet</string>
-    <string name="wallet_screen_subtitle">Balance</string>
+    <string name="wallet_screen_subtitle">Balance: %s</string>
     <string name="wallet_screen_input_amount_hint">Amount to send</string>
     <string name="wallet_screen_input_address_hint">Address to send</string>
     <string name="wallet_screen_button_send_title">Send</string>

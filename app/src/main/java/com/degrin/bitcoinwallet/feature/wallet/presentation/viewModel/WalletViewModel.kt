@@ -30,12 +30,10 @@ class WalletViewModel(
 
         viewModelScope.launch {
             walletUseCase.getBalance()
-                .onSuccess {
-                    println("****DETEKT LOG**** : ${ it.toDouble()}")
-                    updateState(value = WalletScreenState.Data(balance = it.toDouble()))
+                .onSuccess { balance ->
+                    updateState(value = WalletScreenState.Data(balance = balance))
                 }
                 .onFailure { exception ->
-                    println("****DETEKT LOG**** : ${ exception.message}")
                     updateState(value = WalletScreenState.Error(exception.message))
                 }
         }
@@ -66,6 +64,7 @@ class WalletViewModel(
             amount.isBlank() -> {
                 amountError = R.string.error_invalid_amount_empty
             }
+
             amount.toDoubleOrNull() == null -> {
                 amountError = R.string.error_invalid_amount_format
             }
@@ -75,6 +74,7 @@ class WalletViewModel(
             address.isBlank() -> {
                 addressError = R.string.error_invalid_address_empty
             }
+
             !isValidBitcoinAddress(address) -> {
                 addressError = R.string.error_invalid_address_format
             }
@@ -86,6 +86,25 @@ class WalletViewModel(
         )
 
         return amountError == null && addressError == null
+    }
+
+    fun sendTransaction() {
+        if (!validateInput()) {
+            return
+        }
+
+        val amount = _inputState.value.amount.toDouble()
+        val address = _inputState.value.address
+
+//        viewModelScope.launch {
+//            walletUseCase.sendTransaction(address, amount)
+//                .onSuccess {
+//                    updateState(value = WalletScreenState.Success)
+//                }
+//                .onFailure { exception ->
+//                    updateState(value = WalletScreenState.Error(exception.message))
+//                }
+//        }
     }
 
     private fun isValidBitcoinAddress(address: String): Boolean {
