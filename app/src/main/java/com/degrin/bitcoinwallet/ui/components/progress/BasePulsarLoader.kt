@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import com.degrin.bitcoinwallet.R
+import com.degrin.bitcoinwallet.core.accessibility.Accessibility.LOADER_IMAGE
 import com.degrin.bitcoinwallet.ui.sizes.Sizes
 
 @Composable
@@ -46,6 +47,6 @@ fun BasePulseLoader(
             .background(Color.Transparent)
             .size(size),
         painter = painterResource(id = R.drawable.ic_app),
-        contentDescription = null,
+        contentDescription = LOADER_IMAGE,
     )
 }

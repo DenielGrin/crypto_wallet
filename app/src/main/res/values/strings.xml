@@ -5,16 +5,38 @@
     <string name="default_error_empty_state_title">We’re having trouble fetching the data</string>
     <string name="default_error_empty_state_subtitle">Please try again later.</string>
     <string name="default_retry_title">Retry</string>
+    <string name="default_send_title">Send</string>
+    <string name="default_receive_title">Receive</string>
 
-    <string name="menu_transaction_label">Wallet</string>
+    <string name="menu_wallet_label">Wallet</string>
+    <string name="menu_transaction_label">Transactions</string>
     <string name="menu_dapps_label">DApps</string>
-    <string name="menu_swap_label">Swap</string>
     <string name="menu_settings_label">Settings</string>
+
+    <!--    Errors -->
+    <string name="error_invalid_amount_empty">Amount cannot be empty</string>
+    <string name="error_invalid_amount_format">Invalid amount format</string>
+    <string name="error_invalid_address_empty">Address cannot be empty</string>
+    <string name="error_invalid_address_format">Invalid address format</string>
 
     <!--    Wallet -->
     <string name="wallet_screen_title">Bitcoin wallet</string>
-    <string name="wallet_screen_subtitle">Balance</string>
+    <string name="wallet_screen_subtitle">Balance: %s tBTC</string>
     <string name="wallet_screen_input_amount_hint">Amount to send</string>
     <string name="wallet_screen_input_address_hint">Address to send</string>
     <string name="wallet_screen_button_send_title">Send</string>
+
+    <!--   Transaction dialog -->
+    <string name="transaction_success_dialog_title">Your funds have been sent!</string>
+    <string name="transaction_error_dialog_title">Your funds have not been sent!</string>
+    <string name="transaction_dialog_subtitle">Your transaction ID is\n%s</string>
+    <string name="transaction_dialog_buttons_send_title">Send more</string>
+    <string name="transaction_dialog_buttons_see_title">See transactions</string>
+    <string name="transaction_dialog_buttons_retry_title">Try again?</string>
+
+    <!--   Transactions -->
+    <string name="transactions_screen_title">Transactions</string>
+    <string name="transaction_empty_state_title">There are no Transactions yet</string>
+    <string name="transaction_empty_state_subtitle">You currently have no recorded transactions. Once transactions are made, they will be displayed here.</string>
+
 </resources>

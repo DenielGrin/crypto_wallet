@@ -4,6 +4,9 @@
 package com.degrin.bitcoinwallet.core.navigation.utils.compose
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -83,6 +86,13 @@ fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier = composed {
         indication = null,
         onClick = onClick
     )
+}
+
+fun Context.openUrlInBrowser(url: String) {
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        data = Uri.parse(url)
+    }
+    startActivity(intent)
 }
 
 @OptIn(ExperimentalFoundationApi::class)

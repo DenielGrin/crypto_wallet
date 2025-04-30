@@ -110,9 +110,9 @@ fun BottomBarContent(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             listOf(
+                BarItem.WalletTab,
                 BarItem.TransactionsTab,
                 BarItem.DAppsTab,
-                BarItem.SwapTab,
                 BarItem.SettingsTab,
             ).forEach { item ->
                 BottomBarItem(

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlinx-serialization")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -32,13 +34,18 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.livedata.core.ktx)
     implementation(libs.androidx.lifecycle.viewmodel)
-
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.logging.interceptor)
 
     implementation(libs.composeNavigation)
     implementation(libs.coil.compose)
     implementation(libs.koinCompose)
     implementation(libs.converter.gson)
     implementation(libs.lottie.compose)
+
+    implementation(libs.bitcoinj)
 
     testImplementation(libs.junit)
 

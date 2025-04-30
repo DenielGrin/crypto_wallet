@@ -16,7 +16,7 @@ buildscript {
     }
 
     dependencies {
-
+        classpath(libs.kotlinSerializationGradle)
         classpath(":build-logic")
     }
 }
