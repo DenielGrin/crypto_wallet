@@ -30,17 +30,17 @@ object WalletScreen : Screen {
         val inputState: State<InputFieldsState> = viewModel.inputState.collectAsState()
         var dialogState: SendingDialogState by remember { mutableStateOf(SendingDialogState.None) }
 
-        viewModel.actions.observeAsActions { action ->
-            dialogState = when (action) {
-                is WalletViewModel.Actions.ErrorSendingCoins -> {
-                    SendingDialogState.Error(message = action.message)
-                }
-
-                is WalletViewModel.Actions.SuccessSendingCoins -> {
-                    SendingDialogState.Success
-                }
-            }
-        }
+//        viewModel.actions.observeAsActions { action ->
+//            dialogState = when (action) {
+//                is WalletViewModel.Actions.ErrorSendingCoins -> {
+//                    SendingDialogState.Error(message = action.message)
+//                }
+//
+//                is WalletViewModel.Actions.SuccessSendingCoins -> {
+//                    SendingDialogState.Success(id = action.id)
+//                }
+//            }
+//        }
 
         HandlerDialogState(
             dialogState = dialogState,
@@ -72,9 +72,11 @@ private fun HandlerDialogState(
         ) {
             when (dialogState) {
                 is SendingDialogState.Success -> {
+                    println("****DETEKT LOG**** : sending coins: ${dialogState.id}")
                 }
 
                 is SendingDialogState.Error -> {
+                    println("****DETEKT LOG**** : error sending coins: ${dialogState.message}")
                 }
 
                 else -> Unit

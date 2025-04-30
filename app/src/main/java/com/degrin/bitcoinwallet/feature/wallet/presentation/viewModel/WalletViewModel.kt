@@ -1,10 +1,12 @@
 package com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.degrin.bitcoinwallet.BuildConfig
 import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.network.model.TransactionDto
 import com.degrin.bitcoinwallet.core.network.model.Utxo
@@ -44,9 +46,11 @@ class WalletViewModel(
         viewModelScope.launch {
             walletUseCase.getBalance()
                 .onSuccess { balance ->
+                    Log.d(TAG, "getBalance successful: $balance")
                     updateState(value = WalletScreenState.Data(balance = balance))
                 }
                 .onFailure { exception ->
+                    Log.e(TAG, "getBalance failed: ${exception.message}")
                     updateState(value = WalletScreenState.Error(exception.message))
                 }
         }
@@ -74,71 +78,51 @@ class WalletViewModel(
         val address = _inputState.value.address
 
         when {
-            amount.isBlank() -> {
-                amountError = R.string.error_invalid_amount_empty
-            }
-
-            amount.toDoubleOrNull() == null || amount.toBigDecimal() <= BigDecimal.ZERO -> {
-                amountError = R.string.error_invalid_amount_format
-            }
+            amount.isBlank() -> amountError = R.string.error_invalid_amount_empty
+            amount.toDoubleOrNull() == null || amount.toBigDecimal() <= BigDecimal.ZERO -> amountError =
+                R.string.error_invalid_amount_format
         }
 
         when {
-            address.isBlank() -> {
-                addressError = R.string.error_invalid_address_empty
-            }
-
-            !isValidBitcoinAddress(address) -> {
-                addressError = R.string.error_invalid_address_format
-            }
+            address.isBlank() -> addressError = R.string.error_invalid_address_empty
+            !isValidBitcoinAddress(address) -> addressError = R.string.error_invalid_address_format
         }
 
-        _inputState.value = _inputState.value.copy(
-            amountError = amountError,
-            addressError = addressError
-        )
-
+        _inputState.value =
+            _inputState.value.copy(amountError = amountError, addressError = addressError)
         return amountError == null && addressError == null
     }
 
     fun sendTransaction() {
-        if (!validateInput()) {
-            return
-        }
+        if (!validateInput()) return
 
         val amount =
             (_inputState.value.amount.toBigDecimal() * BigDecimal.valueOf(100_000_000)).toLong()
         val address = _inputState.value.address
 
-        viewModelScope.launch {
-            sendTransactionInternal(address, amount)
-        }
+        sendTransactionInternal(address = address, amount = amount)
     }
 
-    private suspend fun sendTransactionInternal(address: String, amount: Long) {
-        updateState(WalletScreenState.Loading)
+    private fun sendTransactionInternal(address: String, amount: Long) {
+        viewModelScope.launch {
+            Log.d(TAG, "sendTransactionInternal called for address: $address, amount: $amount")
 
-        walletUseCase.getUtxosForAddress(HARDCODED_SENDER_ADDRESS)
-            .onSuccess { transactions ->
-                val utxo = findSuitableUtxo(transactions = transactions, amount = amount)
-                if (utxo != null) {
-                    buildAndSendTransaction(
-                        address = address,
-                        amount = amount,
-                        utxo = utxo
-                    )
-                } else {
-                    updateAction(Actions.ErrorSendingCoins("Insufficient funds or no suitable UTXO"))
-                    updateState(WalletScreenState.Error("Insufficient funds or no suitable UTXO"))
+            walletUseCase.getUtxosForAddress()
+                .onSuccess { transactions ->
+                    Log.d(TAG, "getUtxosForAddress successful, found ${transactions.size} UTXOs")
+                    val utxo = findSuitableUtxo(transactions = transactions, amount = amount)
+                    if (utxo != null) {
+                        buildAndSendTransaction(address = address, amount = amount, utxo = utxo)
+                    } else {
+                        Log.w(TAG, "findSuitableUtxo failed to find a suitable UTXO")
+                        updateAction(Actions.ErrorSendingCoins("Insufficient funds or no suitable UTXO"))
+                    }
                 }
-            }
-            .onFailure { exception ->
-                updateAction(Actions.ErrorSendingCoins(exception.message))
-                updateState(WalletScreenState.Error(exception.message))
-            }
-//        finally {
-//            getData()
-//        }
+                .onFailure { exception ->
+                    Log.e(TAG, "getUtxosForAddress failed: ${exception.message}")
+                    updateAction(Actions.ErrorSendingCoins(exception.message))
+                }
+        }
     }
 
     private suspend fun buildAndSendTransaction(
@@ -147,7 +131,7 @@ class WalletViewModel(
         utxo: Utxo
     ) {
         val params = TransactionParams(
-            privateKey = HARDCODED_PRIVATE_KEY,
+            privateKey = BuildConfig.WALLET_KEY,
             destinationAddress = address,
             amount = amount,
             feeAmount = FEE_AMOUNT,
@@ -156,39 +140,65 @@ class WalletViewModel(
 
         walletTransactionBuilder.buildTransaction(params)
             .onSuccess { transactionHex ->
+                Log.d(TAG, "buildTransaction successful, raw transaction hex: $transactionHex")
                 walletUseCase.sendTransaction(transactionHex)
-                    .onSuccess {
-                        updateAction(Actions.SuccessSendingCoins(id = it))
+                    .onSuccess { txid ->
+                        Log.d(TAG, "sendTransaction successful, TXID: $txid")
+                        updateAction(Actions.SuccessSendingCoins(id = txid))
                     }
                     .onFailure { exception ->
+                        Log.e(TAG, "sendTransaction failed: ${exception.message}")
                         updateAction(Actions.ErrorSendingCoins(exception.message))
                     }
             }
             .onFailure { exception ->
+                Log.e(TAG, "buildTransaction failed: ${exception.message}")
                 updateAction(Actions.ErrorSendingCoins(exception.message))
             }
     }
 
     private fun findSuitableUtxo(
         transactions: List<TransactionDto>,
-        amount: Long,
-        feeAmount: Long = FEE_AMOUNT,
-        dustThreshold: Long = DUST_THRESHOLD
+        amount: Long
     ): Utxo? {
+        Log.d(TAG, "findSuitableUtxo called with amount: $amount")
         for (tx in transactions) {
             if (tx.status.confirmed) {
                 tx.vOut.forEachIndexed { index, out ->
-                    if (out.value >= (amount + feeAmount + dustThreshold)) {
-                        return Utxo(
-                            txId = tx.txId,
-                            vOutIndex = index.toLong(),
-                            status = tx.status,
-                            value = out.value,
+                    if (out.value >= (amount + FEE_AMOUNT + DUST_THRESHOLD)) {
+                        // Проверить, что этот выход еще не был использован в качестве входа (UTXO)
+                        val isUsed = transactions.any { transaction ->
+                            transaction.vIn.any { vin -> vin.txId == tx.txId && vin.vOut == index }
+                        }
+
+                        // Если UTXO не был использован, вернуть его
+                        if (!isUsed) {
+                            Log.d(
+                                TAG,
+                                "Found suitable UTXO: txId=${tx.txId}, vOutIndex=$index, value=${out.value}"
+                            )
+                            return Utxo(
+                                txId = tx.txId,
+                                vOutIndex = index.toLong(),
+                                value = out.value,
+//                                status = tx.status
+                            )
+                        } else {
+                            Log.w(
+                                TAG,
+                                "UTXO is used: txId=${tx.txId}, vOutIndex=$index, value=${out.value}"
+                            )
+                        }
+                    } else {
+                        Log.w(
+                            TAG,
+                            "UTXO value is too low: txId=${tx.txId}, vOutIndex=$index, value=${out.value}, required=${amount + FEE_AMOUNT + DUST_THRESHOLD}"
                         )
                     }
                 }
             }
         }
+        Log.w(TAG, "findSuitableUtxo: No suitable UTXO found.")
         return null
     }
 
@@ -211,10 +221,8 @@ class WalletViewModel(
     }
 
     companion object {
-        private const val HARDCODED_PRIVATE_KEY =
-            "p2wpkh:cVzN65ufaKTss5Shu55QoUZaFtrwSjmcTMhVyEEjbtveBUwuhBeT"
-        private const val HARDCODED_SENDER_ADDRESS = "tb1q3ae59urk6fjh6seectaqe3lavh5dx84penznwq"
         private const val FEE_AMOUNT = 250L
         private const val DUST_THRESHOLD = 250L
+        private const val TAG = "WalletViewModel"
     }
 }

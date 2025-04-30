@@ -5,9 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Utxo(
     @SerializedName("txid")
     val txId: String,
-    @SerializedName("vout")//voutIndex
+    @SerializedName("voutIndex")
     val vOutIndex: Long,
-    @SerializedName("status")
-    val status: Status,
     val value: Long
 )

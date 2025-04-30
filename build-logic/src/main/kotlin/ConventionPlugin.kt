@@ -1,9 +1,10 @@
-// File: build-logic/src/main/kotlin/ConventionPlugin.kt
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.io.FileInputStream
+import java.util.Properties
 
 class ConventionPlugin : Plugin<Project> {
 
@@ -30,7 +31,6 @@ class ConventionPlugin : Plugin<Project> {
             configureProductFlavors()
             configureSigningConfigs(project)
             configureBuildTypes()
-            configurePackagingOptions()
         }
     }
 
@@ -41,6 +41,17 @@ class ConventionPlugin : Plugin<Project> {
             targetSdk = TARGET_SDK
             versionCode = project.getProperty("VERSION_CODE").toInt()
             versionName = project.getProperty("VERSION_NAME")
+
+            val localProperties = Properties()
+            val localPropertiesFile = project.rootProject.file("local.properties")
+            if (localPropertiesFile.exists()) {
+                localProperties.load(FileInputStream(localPropertiesFile))
+            }
+
+            val walletAddress = localProperties.getProperty(WALLET_ADDRESS) ?: ""
+            val privateKey = localProperties.getProperty(WALLET_KEY) ?: ""
+            buildConfigField("String", WALLET_ADDRESS, "\"$walletAddress\"")
+            buildConfigField("String", WALLET_KEY, "\"$privateKey\"")
         }
     }
 
@@ -95,14 +106,6 @@ class ConventionPlugin : Plugin<Project> {
         }
     }
 
-    private fun AppExtension.configurePackagingOptions() {
-        packagingOptions {
-            exclude("META-INF/*.kotlin_module")
-            exclude("META-INF/AL2.0")
-            exclude("META-INF/LGPL2.1")
-        }
-    }
-
     private fun configureLibraryExtension(androidExtension: LibraryExtension) {
         androidExtension.apply {
             compileSdk = TARGET_SDK
@@ -114,7 +117,6 @@ class ConventionPlugin : Plugin<Project> {
     private fun LibraryExtension.configureDefaultConfig() {
         defaultConfig {
             minSdk = MIN_SDK
-            targetSdk = TARGET_SDK
         }
     }
 
@@ -163,5 +165,7 @@ class ConventionPlugin : Plugin<Project> {
 
         private const val PROGUARD_ANDROID_TXT = "proguard-android-optimize.txt"
         private const val PROGUARD_RULES = "proguard-rules.pro"
+        private const val WALLET_ADDRESS = "WALLET_ADDRESS"
+        private const val WALLET_KEY = "WALLET_KEY"
     }
 }

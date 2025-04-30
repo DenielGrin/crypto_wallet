@@ -7,7 +7,7 @@ interface WalletRepository {
 
     suspend fun getBalance(): BigDecimal
 
-    suspend fun getUtxosForAddress(hardcodedSenderAddress: String):List<TransactionDto>
+    suspend fun getUtxosForAddress():List<TransactionDto>
 
     suspend fun sendTransaction(transactionHex: String): String
 
