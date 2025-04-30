@@ -12,3 +12,8 @@ fun formatBalance(balance: BigDecimal): String {
     decimalFormat.maximumFractionDigits = 8
     return decimalFormat.format(balance)
 }
+
+fun formatBtc(amount: Double): String {
+    val df = DecimalFormat("0.0000")
+    return df.format(amount) + " BTC"
+}

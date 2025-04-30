@@ -5,6 +5,8 @@
     <string name="default_error_empty_state_title">We’re having trouble fetching the data</string>
     <string name="default_error_empty_state_subtitle">Please try again later.</string>
     <string name="default_retry_title">Retry</string>
+    <string name="default_send_title">Send</string>
+    <string name="default_receive_title">Receive</string>
 
     <string name="menu_wallet_label">Wallet</string>
     <string name="menu_transaction_label">Transactions</string>
