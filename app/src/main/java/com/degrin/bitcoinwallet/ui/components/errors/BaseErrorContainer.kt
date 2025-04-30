@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.degrin.bitcoinwallet.R
+import com.degrin.bitcoinwallet.core.accessibility.Accessibility.ERROR_IMAGE
 import com.degrin.bitcoinwallet.ui.components.button.BaseButton
 import com.degrin.bitcoinwallet.ui.sizes.Sizes
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
@@ -48,7 +49,7 @@ fun BaseErrorContainer(
                 .height(Sizes.Size.dp110)
                 .padding(bottom = Sizes.Paddings.dp24),
             painter = painterResource(R.drawable.ic_error),
-            contentDescription = "Error image"
+            contentDescription = ERROR_IMAGE
         )
 
         Text(

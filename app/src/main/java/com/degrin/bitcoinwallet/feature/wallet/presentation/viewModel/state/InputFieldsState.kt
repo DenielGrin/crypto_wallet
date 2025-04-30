@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel
+package com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state
 
 data class InputFieldsState(
     val amount: String = "",

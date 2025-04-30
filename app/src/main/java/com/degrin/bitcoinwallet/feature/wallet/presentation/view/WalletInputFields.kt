@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.degrin.bitcoinwallet.R
-import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.InputFieldsState
+import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.InputFieldsState
 import com.degrin.bitcoinwallet.ui.components.button.BaseButton
 import com.degrin.bitcoinwallet.ui.components.inputField.BaseTextField
 import com.degrin.bitcoinwallet.ui.sizes.Sizes

@@ -18,6 +18,7 @@ retrofit2KotlinxSerializationConverter = "0.8.0"
 retrofitVersion = "2.9.0"
 koinComposeVersion = "3.4.5"
 lottieComposeVersion = "6.0.1"
+bitcoinjVersion = "0.17-beta1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +49,7 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
 kotlinSerializationGradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+bitcoinj = { group = "org.bitcoinj", name = "bitcoinj-core", version.ref = "bitcoinjVersion"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

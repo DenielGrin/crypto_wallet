@@ -45,6 +45,8 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.lottie.compose)
 
+    implementation(libs.bitcoinj)
+
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)

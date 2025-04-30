@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.navigation.utils.formatting.formatBalance
-import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.InputFieldsState
+import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.InputFieldsState
 import com.degrin.bitcoinwallet.ui.sizes.Sizes
 import com.degrin.bitcoinwallet.ui.theme.AppTheme
 import com.degrin.bitcoinwallet.ui.theme.getAppThemeTypography
@@ -48,6 +48,7 @@ fun WalletDataContent(
             text = stringResource(R.string.wallet_screen_title),
             style = getAppThemeTypography().bodyLarge,
         )
+
         Box(
             modifier = Modifier
                 .border(
