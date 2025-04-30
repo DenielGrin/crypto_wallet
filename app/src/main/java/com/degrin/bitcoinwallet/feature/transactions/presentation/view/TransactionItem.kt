@@ -48,8 +48,8 @@ fun TransactionItem(transaction: TransactionSortedData) {
                 modifier = Modifier.size(Sizes.Size.dp24),
                 painter = painterResource(
                     id = when {
-                        isIncoming -> R.drawable.ic_arrow_up
-                        else -> R.drawable.ic_arrow_down
+                        isIncoming -> R.drawable.ic_arrow_down
+                        else -> R.drawable.ic_arrow_up
                     }
                 ),
                 contentDescription = transaction.type.name,

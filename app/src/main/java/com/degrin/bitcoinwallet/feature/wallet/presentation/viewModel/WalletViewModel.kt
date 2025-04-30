@@ -181,7 +181,6 @@ class WalletViewModel(
                                 txId = tx.txId,
                                 vOutIndex = index.toLong(),
                                 value = out.value,
-//                                status = tx.status
                             )
                         } else {
                             Log.w(
