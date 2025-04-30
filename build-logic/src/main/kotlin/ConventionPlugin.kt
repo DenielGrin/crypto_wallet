@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.FileInputStream
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 class ConventionPlugin : Plugin<Project> {
 
@@ -134,9 +135,7 @@ class ConventionPlugin : Plugin<Project> {
 
     private fun configureKotlinCompile(project: Project) {
         project.tasks.withType(KotlinCompile::class.java).configureEach {
-            kotlinOptions {
-                jvmTarget = JVM_TARGET
-            }
+            compilerOptions.jvmTarget.set(JvmTarget.fromTarget(JVM_TARGET))
         }
     }
 
