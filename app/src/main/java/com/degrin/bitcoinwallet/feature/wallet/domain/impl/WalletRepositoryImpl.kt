@@ -18,16 +18,11 @@ class WalletRepositoryImpl(
     }
 
     override suspend fun getUtxosForAddress(): List<TransactionDto> {
-        return api.getAddressUtxo(SENDER_ADDRESS)
+        return api.getAddressUtxo(BuildConfig.WALLET_ADDRESS)
     }
 
     override suspend fun sendTransaction(transactionHex: String): String {
         return api.sendTransaction(transactionHex)
     }
 
-    companion object {
-        private const val WALLET_ADDRESS = "tb1qgy9qzjrferq7ghyclyjeqvlky7qgh2a8pew4we"
-        private const val SENDER_ADDRESS = "tb1qgy9qzjrferq7ghyclyjeqvlky7qgh2a8pew4we"
-        private const val HARDCODED_PRIVATE_KEY = "p2wpkh:cRzQyWZEmYJ8gq7K8nKmhKQxKcnpv5pNBi37tEtU2vmmqgCXgyp5"
-    }
 }

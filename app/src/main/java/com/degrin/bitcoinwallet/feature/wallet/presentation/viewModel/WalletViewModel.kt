@@ -10,7 +10,7 @@ import com.degrin.bitcoinwallet.BuildConfig
 import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.network.model.TransactionDto
 import com.degrin.bitcoinwallet.core.network.model.Utxo
-import com.degrin.bitcoinwallet.feature.wallet.data.model.TransactionParams
+import com.degrin.bitcoinwallet.feature.transactions.data.model.TransactionParams
 import com.degrin.bitcoinwallet.feature.wallet.domain.impl.WalletTransactionBuilder
 import com.degrin.bitcoinwallet.feature.wallet.domain.useCase.WalletUseCase
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.InputFieldsState

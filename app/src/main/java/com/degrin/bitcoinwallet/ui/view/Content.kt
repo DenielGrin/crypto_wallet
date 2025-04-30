@@ -1,6 +1,5 @@
 package com.degrin.bitcoinwallet.ui.view
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -65,7 +64,6 @@ fun Content() {
 }
 
 @Preview(showBackground = true)
-@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun Content_Preview() {
     AppTheme {

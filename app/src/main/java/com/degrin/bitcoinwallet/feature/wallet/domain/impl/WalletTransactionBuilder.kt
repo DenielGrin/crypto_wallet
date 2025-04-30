@@ -1,7 +1,7 @@
 package com.degrin.bitcoinwallet.feature.wallet.domain.impl
 
 import android.util.Log
-import com.degrin.bitcoinwallet.feature.wallet.data.model.TransactionParams
+import com.degrin.bitcoinwallet.feature.transactions.data.model.TransactionParams
 import org.bitcoinj.base.AddressParser
 import org.bitcoinj.base.BitcoinNetwork
 import org.bitcoinj.base.Coin

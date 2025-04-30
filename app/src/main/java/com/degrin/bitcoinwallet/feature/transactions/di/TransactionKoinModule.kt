@@ -6,19 +6,21 @@ import com.degrin.bitcoinwallet.feature.transactions.domain.repository.Transacti
 import com.degrin.bitcoinwallet.feature.transactions.domain.useCase.TransactionUseCase
 import com.degrin.bitcoinwallet.feature.transactions.presentation.viewModel.TransactionsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val transactionModule = module {
 
     single<TransactionRepository> {
         TransactionRepositoryImpl(
-//            restApiClient = get()
+            api = get()
         )
     }
 
     single {
         TransactionUseCase(
             repository = get(),
+            walletRepository = get()
         )
     }
 

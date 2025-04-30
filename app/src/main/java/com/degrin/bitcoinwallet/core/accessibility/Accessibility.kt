@@ -6,5 +6,6 @@ object Accessibility {
     const val LOADER_IMAGE = "Bitcoin Loader image"
     const val POSITIVE_ALERT = "Alert dialog success image"
     const val NEGATIVE_ALERT = "Alert dialog error image"
+    const val COIN_IMAGE = "Transaction empty coins image"
 
 }

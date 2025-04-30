@@ -31,5 +31,10 @@
     <string name="transaction_dialog_buttons_send_title">Send more</string>
     <string name="transaction_dialog_buttons_see_title">See transactions</string>
     <string name="transaction_dialog_buttons_retry_title">Try again?</string>
+
     <!--   Transactions -->
+    <string name="transactions_screen_title">Transactions</string>
+    <string name="transaction_empty_state_title">There are no Transactions yet</string>
+    <string name="transaction_empty_state_subtitle">You currently have no recorded transactions. Once transactions are made, they will be displayed here.</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.feature.wallet.data.model
+package com.degrin.bitcoinwallet.feature.transactions.data.model
 
 import com.degrin.bitcoinwallet.core.network.model.Utxo
 
