@@ -1,6 +1,7 @@
 package com.degrin.bitcoinwallet.feature.wallet.domain.impl
 
 import com.degrin.bitcoinwallet.core.network.api.EsploraApi
+import com.degrin.bitcoinwallet.core.network.model.TransactionDto
 import com.degrin.bitcoinwallet.feature.wallet.domain.repository.WalletRepository
 import java.math.BigDecimal
 
@@ -13,6 +14,14 @@ class WalletRepositoryImpl(
         val fundedSum = BigDecimal(response.chainStats.fundedSum)
         val spentSum = BigDecimal(response.chainStats.spentSum)
         return fundedSum.minus(spentSum)
+    }
+
+    override suspend fun getUtxosForAddress(hardcodedSenderAddress: String): List<TransactionDto> {
+        return api.getAddressUtxo(hardcodedSenderAddress)
+    }
+
+    override suspend fun sendTransaction(transactionHex: String): String {
+        return api.sendTransaction(transactionHex)
     }
 
     companion object{

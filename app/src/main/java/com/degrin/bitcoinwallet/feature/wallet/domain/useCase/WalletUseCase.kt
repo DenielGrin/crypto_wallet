@@ -8,4 +8,12 @@ class WalletUseCase(
     suspend fun getBalance() = kotlin.runCatching {
         repository.getBalance()
     }
+
+    suspend fun getUtxosForAddress(hardcodedSenderAddress: String) = kotlin.runCatching {
+        repository.getUtxosForAddress(hardcodedSenderAddress)
+    }
+
+    suspend fun sendTransaction(transactionHex: String) = kotlin.runCatching {
+        repository.sendTransaction(transactionHex)
+    }
 }

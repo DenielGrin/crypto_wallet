@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.degrin.bitcoinwallet.R
-import com.degrin.bitcoinwallet.core.network.model.TransactionDTO
+import com.degrin.bitcoinwallet.core.network.model.TransactionDto
 import com.degrin.bitcoinwallet.core.network.model.Utxo
 import com.degrin.bitcoinwallet.feature.wallet.data.model.TransactionParams
 import com.degrin.bitcoinwallet.feature.wallet.domain.impl.WalletTransactionBuilder
@@ -106,7 +106,8 @@ class WalletViewModel(
             return
         }
 
-        val amount = (_inputState.value.amount.toBigDecimal() * BigDecimal.valueOf(100_000_000)).toLong()
+        val amount =
+            (_inputState.value.amount.toBigDecimal() * BigDecimal.valueOf(100_000_000)).toLong()
         val address = _inputState.value.address
 
         viewModelScope.launch {
@@ -115,40 +116,29 @@ class WalletViewModel(
     }
 
     private suspend fun sendTransactionInternal(address: String, amount: Long) {
-        try {
-            updateState(WalletScreenState.Loading)
+        updateState(WalletScreenState.Loading)
 
-            val utxosResult = walletUseCase.getUtxosForAddress(HARDCODED_SENDER_ADDRESS)
-            utxosResult.onSuccess { utxos ->
-                processUtxos(utxos, address, amount, utxos)
-            }.onFailure { exception ->
-                updateAction(Actions.ErrorSendingCoins(exception.message))
+        walletUseCase.getUtxosForAddress(HARDCODED_SENDER_ADDRESS)
+            .onSuccess { transactions ->
+                val utxo = findSuitableUtxo(transactions = transactions, amount = amount)
+                if (utxo != null) {
+                    buildAndSendTransaction(
+                        address = address,
+                        amount = amount,
+                        utxo = utxo
+                    )
+                } else {
+                    updateAction(Actions.ErrorSendingCoins("Insufficient funds or no suitable UTXO"))
+                    updateState(WalletScreenState.Error("Insufficient funds or no suitable UTXO"))
+                }
             }
-
-        } catch (e: Exception) {
-            updateAction(Actions.ErrorSendingCoins(e.message))
-        } finally {
-            getData()
-        }
-    }
-
-    private suspend fun processUtxos(
-        address: String,
-        amount: Long,
-        utxos: List<TransactionDTO>
-    ) {
-        if (utxos.isEmpty()) {
-            updateAction(Actions.ErrorSendingCoins("No UTXOs available"))
-            return
-        }
-
-        val utxo = findSuitableUtxo(utxos, amount, FEE_AMOUNT, DUST_THRESHOLD)
-        if (utxo == null) {
-            updateAction(Actions.ErrorSendingCoins("Insufficient funds"))
-            return
-        }
-
-        buildAndSendTransaction(address, amount, utxo)
+            .onFailure { exception ->
+                updateAction(Actions.ErrorSendingCoins(exception.message))
+                updateState(WalletScreenState.Error(exception.message))
+            }
+//        finally {
+//            getData()
+//        }
     }
 
     private suspend fun buildAndSendTransaction(
@@ -164,40 +154,42 @@ class WalletViewModel(
             utxo = utxo
         )
 
-        val transactionHexResult = walletTransactionBuilder.buildTransaction(params)
-
-        transactionHexResult.onSuccess { transactionHex ->
-            val txidResult = walletUseCase.sendTransaction(transactionHex)
-            txidResult.onSuccess {
-                updateAction(Actions.SuccessSendingCoins)
-            }.onFailure { exception ->
+        walletTransactionBuilder.buildTransaction(params)
+            .onSuccess { transactionHex ->
+                walletUseCase.sendTransaction(transactionHex)
+                    .onSuccess {
+                        updateAction(Actions.SuccessSendingCoins(id = it))
+                    }
+                    .onFailure { exception ->
+                        updateAction(Actions.ErrorSendingCoins(exception.message))
+                    }
+            }
+            .onFailure { exception ->
                 updateAction(Actions.ErrorSendingCoins(exception.message))
             }
-        }.onFailure { exception ->
-            updateAction(Actions.ErrorSendingCoins(exception.message))
-        }
     }
 
     private fun findSuitableUtxo(
-        transactions: List<TransactionDTO>,
+        transactions: List<TransactionDto>,
         amount: Long,
-        feeAmount: Long,
-        dustThreshold: Long
+        feeAmount: Long = FEE_AMOUNT,
+        dustThreshold: Long = DUST_THRESHOLD
     ): Utxo? {
-        return transactions.firstOrNull { tx ->
-            tx.status.confirmed && tx.vOut.any { vout ->
-                vout.value >= (amount + feeAmount + dustThreshold) &&
-                    !transactions.any { otherTx ->
-                        otherTx.vIn.any { vin ->
-                            vin.txId == tx.txId &&
-                                vin.vOut.toLong() == tx.vOut.indexOf(vout).toLong()
-                        }
+        for (tx in transactions) {
+            if (tx.status.confirmed) {
+                tx.vOut.forEachIndexed { index, out ->
+                    if (out.value >= (amount + feeAmount + dustThreshold)) {
+                        return Utxo(
+                            txId = tx.txId,
+                            vOutIndex = index.toLong(),
+                            status = tx.status,
+                            value = out.value,
+                        )
                     }
+                }
             }
-        }?.let { tx ->
-            val voutIndex = tx.vOut.indexOfFirst { it.value >= (amount + feeAmount + dustThreshold) }.toLong()
-            Utxo(tx.txId, voutIndex, tx.vOut[voutIndex.toInt()].value)
         }
+        return null
     }
 
     private fun isValidBitcoinAddress(address: String): Boolean {
@@ -214,7 +206,15 @@ class WalletViewModel(
     }
 
     sealed class Actions {
-        data object SuccessSendingCoins : Actions()
+        data class SuccessSendingCoins(val id: String) : Actions()
         data class ErrorSendingCoins(val message: String?) : Actions()
+    }
+
+    companion object {
+        private const val HARDCODED_PRIVATE_KEY =
+            "p2wpkh:cVzN65ufaKTss5Shu55QoUZaFtrwSjmcTMhVyEEjbtveBUwuhBeT"
+        private const val HARDCODED_SENDER_ADDRESS = "tb1q3ae59urk6fjh6seectaqe3lavh5dx84penznwq"
+        private const val FEE_AMOUNT = 250L
+        private const val DUST_THRESHOLD = 250L
     }
 }

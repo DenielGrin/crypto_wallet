@@ -1,10 +1,7 @@
 package com.degrin.bitcoinwallet.core.network.api
 
 import com.degrin.bitcoinwallet.core.network.model.AddressDto
-import com.degrin.bitcoinwallet.core.network.model.BlockResponse
-import com.degrin.bitcoinwallet.core.network.model.BlockStatusResponse
-import com.degrin.bitcoinwallet.core.network.model.FeeEstimates
-import com.degrin.bitcoinwallet.core.network.model.TransactionDTO
+import com.degrin.bitcoinwallet.core.network.model.TransactionDto
 import com.degrin.bitcoinwallet.core.network.model.TransactionStatusResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,26 +13,15 @@ interface EsploraApi {
     suspend fun getAddressInfo(@Path("address") address: String): AddressDto
 
     @GET("address/{address}/txs")
-    suspend fun getTransactions(@Path("address") address: String): List<TransactionDTO>
+    suspend fun getTransactions(@Path("address") address: String): List<TransactionDto>
+
+    @GET("address/{address}/utxo")
+    suspend fun getAddressUtxo(@Path("address") address: String): List<TransactionDto>
+
+    @GET("tx")
+    suspend fun sendTransaction(@Body rawTx: String): String
 
     @GET("tx/{txid}/status")
     suspend fun getTransactionStatus(@Path("txid") txid: String): TransactionStatusResponse
 
-    @GET("blocks/{hash}")
-    suspend fun getBlock(@Path("hash") hash: String): BlockResponse
-
-    @GET("blocks/{hash}/status")
-    suspend fun getBlockStatus(@Path("hash") hash: String): BlockStatusResponse
-
-    @GET("blocks/tip/hash")
-    suspend fun getTipHash(): String
-
-    @GET("blocks/tip/height")
-    suspend fun getTipHeight(): Int
-
-    @GET("fee-estimates")
-    suspend fun getFeeEstimates(): FeeEstimates
-
-    @GET("tx")
-    suspend fun broadcastTransaction(@Body rawTx: String): String
 }
