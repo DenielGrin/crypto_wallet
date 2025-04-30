@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import com.degrin.bitcoinwallet.core.navigation.Screen
 import com.degrin.bitcoinwallet.core.navigation.utils.compose.observeAsActions
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
+import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateToTab
+import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionsScreen
 import com.degrin.bitcoinwallet.feature.wallet.presentation.view.WalletContent
 import com.degrin.bitcoinwallet.feature.wallet.presentation.view.WalletTransactionDialog
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.WalletViewModel
@@ -45,6 +47,7 @@ object WalletScreen : Screen {
 
         HandlerDialogState(
             dialogState = dialogState,
+            navController = navController,
             onDismissRequest = {
                 dialogState = SendingDialogState.None
             }
@@ -64,6 +67,7 @@ object WalletScreen : Screen {
 @Composable
 private fun HandlerDialogState(
     dialogState: SendingDialogState,
+    navController: NavController,
     onDismissRequest: () -> Unit
 ) {
     if (dialogState != SendingDialogState.None) {
@@ -74,7 +78,12 @@ private fun HandlerDialogState(
             WalletTransactionDialog(
                 isSuccessState = dialogState is SendingDialogState.Success,
                 id = (dialogState as? SendingDialogState.Success)?.id,
-                onButtonClick = onDismissRequest
+                onButtonClick = {
+                    if (dialogState is SendingDialogState.Success) {
+                        navController.navigateToTab(TransactionsScreen.defaultScreenName())
+                    }
+                    onDismissRequest()
+                }
             )
         }
     }

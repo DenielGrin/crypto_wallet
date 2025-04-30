@@ -29,6 +29,7 @@
     <string name="transaction_error_dialog_title">Your funds have not been sent!</string>
     <string name="transaction_dialog_subtitle">Your transaction ID is\n%s</string>
     <string name="transaction_dialog_buttons_send_title">Send more</string>
+    <string name="transaction_dialog_buttons_see_title">See transactions</string>
     <string name="transaction_dialog_buttons_retry_title">Try again?</string>
     <!--   Transactions -->
 </resources>

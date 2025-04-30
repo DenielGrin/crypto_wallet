@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -89,14 +91,30 @@ fun WalletTransactionDialog(
             )
         }
 
-        BaseButton(
-            buttonTextId = when {
-                isSuccessState -> R.string.transaction_dialog_buttons_send_title
-                else -> R.string.transaction_dialog_buttons_retry_title
-            },
-            radius = Sizes.CornerShape.dp10,
-            onClick = onButtonClick,
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (isSuccessState) {
+                BaseButton(
+                    buttonTextId = R.string.transaction_dialog_buttons_see_title,
+                    radius = Sizes.CornerShape.dp10,
+                    onClick = onButtonClick,
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    textColor = MaterialTheme.colorScheme.tertiary,
+                )
+                Spacer(modifier = Modifier.weight(1f))
+            }
+            BaseButton(
+                buttonTextId = when {
+                    isSuccessState -> R.string.transaction_dialog_buttons_send_title
+                    else -> R.string.transaction_dialog_buttons_retry_title
+                },
+                radius = Sizes.CornerShape.dp10,
+                onClick = onButtonClick,
+            )
+        }
     }
 }
 
