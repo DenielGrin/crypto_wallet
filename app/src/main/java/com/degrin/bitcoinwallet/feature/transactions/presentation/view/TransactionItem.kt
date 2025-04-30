@@ -55,7 +55,7 @@ fun TransactionItem(transaction: TransactionSortedData) {
                 contentDescription = transaction.type.name,
                 tint = color,
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(Sizes.Paddings.dp16))
             Text(
                 text = transaction.type.name.lowercase()
                     .replaceFirstChar { it.uppercase() },
