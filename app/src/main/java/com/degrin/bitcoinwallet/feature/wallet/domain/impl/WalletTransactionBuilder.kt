@@ -89,12 +89,12 @@ class WalletTransactionBuilder {
 
             Result.success(transaction.serialize().toHexString())
 
-        } catch (e: IllegalArgumentException) {
-            Log.e(TAG, "buildTransaction: ${e.message}")
-            Result.failure(e)
-        } catch (e: Exception) {
-            Log.e(TAG, "buildTransaction: Error building transaction: ${e.message}")
-            Result.failure(e)
+        } catch (exception: IllegalArgumentException) {
+            Log.e(TAG, "buildTransaction: ${exception.message}")
+            Result.failure(exception)
+        } catch (exception: Exception) {
+            Log.e(TAG, "buildTransaction: Error building transaction: ${exception.message}")
+            Result.failure(exception)
         }
     }
 

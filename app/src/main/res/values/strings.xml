@@ -23,4 +23,12 @@
     <string name="wallet_screen_input_amount_hint">Amount to send</string>
     <string name="wallet_screen_input_address_hint">Address to send</string>
     <string name="wallet_screen_button_send_title">Send</string>
+
+    <!--   Transaction dialog -->
+    <string name="transaction_success_dialog_title">Your funds have been sent!</string>
+    <string name="transaction_error_dialog_title">Your funds have not been sent!</string>
+    <string name="transaction_dialog_subtitle">Your transaction ID is\n%s</string>
+    <string name="transaction_dialog_buttons_send_title">Send more</string>
+    <string name="transaction_dialog_buttons_retry_title">Try again?</string>
+    <!--   Transactions -->
 </resources>

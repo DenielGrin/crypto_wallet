@@ -15,6 +15,7 @@ import com.degrin.bitcoinwallet.core.navigation.Screen
 import com.degrin.bitcoinwallet.core.navigation.utils.compose.observeAsActions
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
 import com.degrin.bitcoinwallet.feature.wallet.presentation.view.WalletContent
+import com.degrin.bitcoinwallet.feature.wallet.presentation.view.WalletTransactionDialog
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.WalletViewModel
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.InputFieldsState
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.SendingDialogState
@@ -30,17 +31,17 @@ object WalletScreen : Screen {
         val inputState: State<InputFieldsState> = viewModel.inputState.collectAsState()
         var dialogState: SendingDialogState by remember { mutableStateOf(SendingDialogState.None) }
 
-//        viewModel.actions.observeAsActions { action ->
-//            dialogState = when (action) {
-//                is WalletViewModel.Actions.ErrorSendingCoins -> {
-//                    SendingDialogState.Error(message = action.message)
-//                }
-//
-//                is WalletViewModel.Actions.SuccessSendingCoins -> {
-//                    SendingDialogState.Success(id = action.id)
-//                }
-//            }
-//        }
+        viewModel.actions.observeAsActions { action ->
+            dialogState = when (action) {
+                is WalletViewModel.Actions.ErrorSendingCoins -> {
+                    SendingDialogState.Error(message = action.message)
+                }
+
+                is WalletViewModel.Actions.SuccessSendingCoins -> {
+                    SendingDialogState.Success(id = action.id)
+                }
+            }
+        }
 
         HandlerDialogState(
             dialogState = dialogState,
@@ -67,20 +68,14 @@ private fun HandlerDialogState(
 ) {
     if (dialogState != SendingDialogState.None) {
         Dialog(
-            properties = DialogProperties(usePlatformDefaultWidth = false),
-            onDismissRequest = onDismissRequest
+            onDismissRequest = onDismissRequest,
+            properties = DialogProperties(usePlatformDefaultWidth = false)
         ) {
-            when (dialogState) {
-                is SendingDialogState.Success -> {
-                    println("****DETEKT LOG**** : sending coins: ${dialogState.id}")
-                }
-
-                is SendingDialogState.Error -> {
-                    println("****DETEKT LOG**** : error sending coins: ${dialogState.message}")
-                }
-
-                else -> Unit
-            }
+            WalletTransactionDialog(
+                isSuccessState = dialogState is SendingDialogState.Success,
+                id = (dialogState as? SendingDialogState.Success)?.id,
+                onButtonClick = onDismissRequest
+            )
         }
     }
 }
