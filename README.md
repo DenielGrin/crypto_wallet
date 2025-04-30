@@ -8,6 +8,12 @@
 
 This minimalist Android app is written in Kotlin and designed for the Bitcoin Signet network. It allows users to send bitcoins to a specified address with basic wallet functionalities.
 
+### Images:
+![Wallet screen](https://github.com/user-attachments/assets/806a7b10-123a-4629-948f-08fe7d842ef9)
+![Transaction screen](https://github.com/user-attachments/assets/18fc1f38-7994-4922-9cc7-7c104b4b5c0c)
+![Error state](https://github.com/user-attachments/assets/6cd9d8a1-1530-4e43-80af-e7b8358062b1)
+![Success state](https://github.com/user-attachments/assets/5c7981b1-a4dc-4a97-8a7e-2fb2782e9776)
+
 ### Features:
 - Display current wallet balance.
 - Input fields for amount and destination address.
