@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.feature.transactions.presentation.view
+package com.degrin.bitcoinwallet.feature.transactions.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +18,8 @@ import com.degrin.bitcoinwallet.R
 import com.degrin.bitcoinwallet.core.navigation.utils.warnings.showToastError
 import com.degrin.bitcoinwallet.feature.transactions.data.model.TransactionSortedData
 import com.degrin.bitcoinwallet.feature.transactions.data.model.TransactionType
+import com.degrin.bitcoinwallet.feature.transactions.presentation.view.TransactionContentList
+import com.degrin.bitcoinwallet.feature.transactions.presentation.view.TransactionEmptyState
 import com.degrin.bitcoinwallet.feature.transactions.presentation.viewModel.TransactionScreenState
 import com.degrin.bitcoinwallet.ui.components.button.BaseRoundedButton
 import com.degrin.bitcoinwallet.ui.components.errors.BaseErrorContainer

@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.ui.view
+package com.degrin.bitcoinwallet
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

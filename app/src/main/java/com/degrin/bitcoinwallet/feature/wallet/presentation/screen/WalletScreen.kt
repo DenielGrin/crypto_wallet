@@ -16,7 +16,6 @@ import com.degrin.bitcoinwallet.core.navigation.utils.compose.observeAsActions
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateToTab
 import com.degrin.bitcoinwallet.feature.transactions.presentation.screen.TransactionsScreen
-import com.degrin.bitcoinwallet.feature.wallet.presentation.view.WalletContent
 import com.degrin.bitcoinwallet.feature.wallet.presentation.view.WalletTransactionDialog
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.WalletViewModel
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.InputFieldsState

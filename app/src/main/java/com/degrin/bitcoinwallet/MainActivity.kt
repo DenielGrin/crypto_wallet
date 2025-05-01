@@ -5,7 +5,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.degrin.bitcoinwallet.ui.view.Content
 
 class MainActivity : AppCompatActivity() {
 

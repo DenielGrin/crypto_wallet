@@ -1,4 +1,4 @@
-package com.degrin.bitcoinwallet.feature.wallet.presentation.view
+package com.degrin.bitcoinwallet.feature.wallet.presentation.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.degrin.bitcoinwallet.feature.wallet.presentation.view.WalletDataContent
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.InputFieldsState
 import com.degrin.bitcoinwallet.feature.wallet.presentation.viewModel.state.WalletScreenState
 import com.degrin.bitcoinwallet.ui.components.errors.BaseErrorContainer

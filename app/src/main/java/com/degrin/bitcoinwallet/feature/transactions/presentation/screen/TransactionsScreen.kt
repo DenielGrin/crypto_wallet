@@ -8,7 +8,6 @@ import androidx.navigation.NavController
 import com.degrin.bitcoinwallet.core.navigation.Screen
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.defaultScreenName
 import com.degrin.bitcoinwallet.core.navigation.utils.navController.navigateToTab
-import com.degrin.bitcoinwallet.feature.transactions.presentation.view.TransactionsContent
 import com.degrin.bitcoinwallet.feature.transactions.presentation.viewModel.TransactionsViewModel
 import com.degrin.bitcoinwallet.feature.wallet.presentation.screen.WalletScreen
 import java.math.BigDecimal
