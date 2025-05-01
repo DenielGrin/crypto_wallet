@@ -14,15 +14,9 @@ interface EsploraApi {
     suspend fun getAddressInfo(@Path("address") address: String): AddressDto
 
     @GET("address/{address}/txs")
-    suspend fun getTransactions(@Path("address") address: String): List<TransactionDto>
-
-    @GET("address/{address}/txs")
     suspend fun getAddressUtxo(@Path("address") address: String): List<TransactionDto>
 
     @POST("tx")
     suspend fun sendTransaction(@Body rawTx: String): String
-
-    @GET("tx/{txid}/status")
-    suspend fun getTransactionStatus(@Path("txid") txid: String): TransactionStatusResponse
 
 }
