@@ -24,19 +24,6 @@ fun Screen.screenNameWithParams(optionalParams: List<Pair<String, String?>>): St
     return defaultScreenName() + optionals
 }
 
-fun Screen.screenNameWithOptionalParams(optionalParams: List<Pair<String, Any>>): String {
-    val optionals = optionalParams.joinToString { "?${it.first}=${it.second}" }
-    return defaultScreenName() + optionals
-}
-
-fun Screen.screenNameWithOptionalParams(
-    params: List<Any>,
-    optionalParams: List<Pair<String, Any>>
-): String {
-    val optionals = optionalParams.joinToString { "?${it.first}=${it.second}" }
-    return defaultScreenName() + params.joinToString { "/$it" } + optionals
-}
-
 fun Screen.sendSerializableParams(optionalParams: List<Pair<String, Serializable>>): String {
     val optionals = optionalParams.joinToString { pair ->
         val key = pair.first

@@ -12,6 +12,8 @@ sealed class BarItem(
     val labelId: Int,
     val iconId: Int
 ) {
+    //TODO Item should create in the each screen
+
     data object WalletTab : BarItem(
         screenName = WalletScreen.defaultScreenName(),
         labelId = R.string.menu_wallet_label,

@@ -2,14 +2,6 @@ package com.degrin.bitcoinwallet.core.navigation.utils.navController
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigator
-
-fun <T> NavController.saveResultToBackStackScreen(key: String, value: T) {
-    this.previousBackStackEntry
-        ?.savedStateHandle
-        ?.set(key, value)
-}
 
 fun NavController.navigateToTab(
     screenName: String,
@@ -24,8 +16,6 @@ fun NavController.navigateToTab(
         }
         // Avoid multiple copies of the same destination when
         launchSingleTop = true
-        // Restore state when reselecting a previously selected item
-//        restoreState = true
     }
 }
 
@@ -36,16 +26,6 @@ fun NavController.navigateSingleTop(
         popUpTo(graph.id) {
             inclusive = true
         }
-    }
-}
-
-fun NavController.navigateSingle(
-    route: String,
-    navOptions: NavOptions? = null,
-    navigatorExtras: Navigator.Extras? = null
-) {
-    if (route != currentDestination?.route) {
-        navigate(route, navOptions, navigatorExtras)
     }
 }
 
